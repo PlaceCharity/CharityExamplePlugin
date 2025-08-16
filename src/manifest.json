@@ -1,0 +1,7 @@
+{
+	"id": "example-plugin",
+	"name": "Example Plugin",
+	"versions": {
+		"framework": ">=0.1.0-beta"
+	}
+}
