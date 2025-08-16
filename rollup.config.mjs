@@ -27,7 +27,7 @@ export default defineConfig([
 							id: manifest.id,
 							name: manifest.name,
 							version: packageJson.version,
-							authors: [...packageJson.author.name.split(',').map((author) => author.trim()), ...packageJson.contributors.map((contributor) => contributor.name)],
+							authors: [...packageJson.author.name.split(',').map((a) => a.trim()), ...packageJson.contributors.map((c) => c.name)],
 							...manifest
 						}, null, '\t'),
 					});
@@ -51,7 +51,7 @@ export default defineConfig([
 				async load(id) {
 					if (id === 'plugin:patches') {
 						const files = (await fs.promises.readdir(path.resolve('src/patches'))).filter(f => f.endsWith('.ts'));
-						const imports = files.map((f, i) => `import patch${i} from "./src/patches/${f}";`).join('\n');
+						const imports = files.map((p, i) => `import patch${i} from "./src/patches/${p}";`).join('\n');
 						const exportArray = `[${files.map((_, i) => `patch${i}`).join(', ')}]`;
 						return `${imports}\nexport default ${exportArray};`;
 					}
