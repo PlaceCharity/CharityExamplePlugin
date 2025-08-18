@@ -3,11 +3,10 @@ import path from 'path';
 import { defineConfig } from 'rollup';
 
 import commonjsPlugin from '@rollup/plugin-commonjs';
+import esbuildPlugin from 'rollup-plugin-esbuild';
 import jsonPlugin from '@rollup/plugin-json';
 import resolvePlugin from '@rollup/plugin-node-resolve';
 import replacePlugin from '@rollup/plugin-replace';
-import terserPlugin from '@rollup/plugin-terser';
-import typescriptPlugin from '@rollup/plugin-typescript';
 
 import { readPackageUp } from 'read-package-up';
 const { packageJson } = await readPackageUp();
@@ -59,8 +58,7 @@ export default defineConfig([
 					}
 				}
 			},
-			typescriptPlugin(),
-			terserPlugin({ compress: { negate_iife: false, side_effects: false } }),
+			esbuildPlugin({ minify: true }),
 		],
 		output: {
 			format: 'iife',
