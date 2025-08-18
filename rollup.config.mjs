@@ -7,13 +7,14 @@ import jsonPlugin from '@rollup/plugin-json';
 import resolvePlugin from '@rollup/plugin-node-resolve';
 import replacePlugin from '@rollup/plugin-replace';
 import terserPlugin from '@rollup/plugin-terser';
+import typescriptPlugin from '@rollup/plugin-typescript';
 
 import { readPackageUp } from 'read-package-up';
 const { packageJson } = await readPackageUp();
 
 export default defineConfig([
 	{
-		input: 'index.ts',
+		input: 'src/index.ts',
 		plugins: [
 			{
 				name: 'manifest',
@@ -50,6 +51,7 @@ export default defineConfig([
 				},
 				async load(id) {
 					if (id === 'plugin:patches') {
+						if (!fs.existsSync(path.resolve('src/patches'))) return `export default [];`;
 						const files = (await fs.promises.readdir(path.resolve('src/patches'))).filter(f => f.endsWith('.ts'));
 						const imports = files.map((p, i) => `import patch${i} from "./src/patches/${p}";`).join('\n');
 						const exportArray = `[${files.map((_, i) => `patch${i}`).join(', ')}]`;
@@ -57,6 +59,7 @@ export default defineConfig([
 					}
 				}
 			},
+			typescriptPlugin(),
 			terserPlugin({ compress: { negate_iife: false, side_effects: false } }),
 		],
 		output: {

@@ -1,5 +1,5 @@
 export default {
-	name: 'example-patch',
+	name: 'examplePatch',
 	find: 'backend.wplace.live',
 	replace: {
 		match: /$/,
