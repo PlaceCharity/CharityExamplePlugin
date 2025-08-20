@@ -1,3 +1,4 @@
+import { PluginDefinition } from '@placecharity/framework-types';
 import patches from 'plugin:patches';
 
 export default {
@@ -8,4 +9,4 @@ export default {
 	load() {
 		console.log('Example Plugin Loaded!');
 	},
-};
+} as PluginDefinition;

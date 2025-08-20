@@ -1,5 +1,5 @@
 {
-	"id": "example-plugin",
+	"id": "examplePlugin",
 	"name": "Example Plugin",
 	"versions": {
 		"framework": ">=0.1.0-beta"

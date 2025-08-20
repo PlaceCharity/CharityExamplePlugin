@@ -1,3 +1,5 @@
+import { Patch } from '@placecharity/framework-types';
+
 export default {
 	name: 'examplePatch',
 	find: 'backend.wplace.live',
@@ -5,4 +7,4 @@ export default {
 		match: /$/,
 		replace: () => "console.log('Example Patch!');",
 	},
-};
+} as Patch;
